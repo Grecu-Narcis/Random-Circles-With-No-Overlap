@@ -32,7 +32,7 @@ void setup() {
 
 double distance(double x1, double y1, double x2, double y2) {
 	return (sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
-}
+} //returns the distance between two points
 
 
 bool doOverlap(Circle c, vector<Circle> circles) {
@@ -43,7 +43,7 @@ bool doOverlap(Circle c, vector<Circle> circles) {
 	}
 
 	return 0;
-}
+} //checks if current circle overlap with previous generated circles
 
 
 bool isInWindow(Circle circle) {
@@ -54,7 +54,7 @@ bool isInWindow(Circle circle) {
 		return 1;
 
 	return 0;
-}
+} //checks if current circles has every point of in inside the window
 
 
 Circle generateCircle() {
@@ -65,7 +65,7 @@ Circle generateCircle() {
 	circle.r = rand() % 25 + 15;
 
 	return circle;
-}
+} //generate a random circle which has center at x (between 0, width-1) and y (between 0, height-1) and a radius between 15 and 24
 
 
 void drawCircles(vector<Circle> circles) {
@@ -76,15 +76,14 @@ void drawCircles(vector<Circle> circles) {
 		circle.setPosition(Vector2f(circles[i].x - circles[i].r, circles[i].y - circles[i].r));
 		circle.setRadius(circles[i].r);
 		window.draw(circle);
-	}
-		
-}
+	}		
+} //draw all the circles
 
 
 int main() {
 	setup();
 
-	int protection = 0;
+	int protection = 0; //we use protection to know when to stop
 
 	vector<Circle> circles;
 	Circle circle;
@@ -110,11 +109,13 @@ int main() {
 			drawCircles(circles);
 			window.display();
 		}
-
+		
+		//if we generated 'maxTries' circles and no one is good then we should stop because is a small chance the 'maxTries + 1' circle to be good
 		if (protection == maxTries) {
 			cout << "Finished!";
 			protection++;
 		}
 	}
-
+	
+	return 0;
 }
